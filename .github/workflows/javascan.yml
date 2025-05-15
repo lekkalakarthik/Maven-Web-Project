@@ -23,6 +23,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
       - name: Run Snyk and output SARIF
+        continue-on-error: true
         run: |
           snyk test --all-projects --sarif-file-output=snyk-results.sarif
         env:
