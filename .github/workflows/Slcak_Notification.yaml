@@ -9,14 +9,48 @@ jobs:
         run: exit 1
     continue-on-error: true
 
+
   notify:
-    needs: deploy
-    if: always()
     runs-on: ubuntu-latest
+   
+    if: always()
     steps:
-      - name: Send Slack Notification
+      - name: Send Slack Notification with Block Kit
         uses: 8398a7/action-slack@v3
         with:
-          status: failure
+          status: ${{ job.status }}
+          custom_payload: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Workflow:* ${{ github.workflow }}\n*Job:* ${{ github.job }}\n*Status:* ${{ job.status }}"
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Run Number:*\n${{ github.run_number }}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Triggered By:*\n${{ github.actor }}"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Commit:* ${{ github.sha }}\n*Branch:* ${{ github.ref }}"
+                  }
+                }
+              ]
+            }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
