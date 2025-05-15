@@ -11,7 +11,7 @@ jobs:
 
   notify:
     needs: deploy
-    if: failure()
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - name: Send Slack Notification
