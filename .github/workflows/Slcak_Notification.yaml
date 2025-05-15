@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Deploy Step
         run: exit 1
-    continue-on-error: true
+    #continue-on-error: true
 
 
   notify:
