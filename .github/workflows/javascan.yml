@@ -34,7 +34,7 @@ jobs:
         with:
           sarif_file: snyk-results.sarif
       - name: Upload SARIF as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: snyk-sarif-report
           path: snyk-results.sarif
