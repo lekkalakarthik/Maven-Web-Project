@@ -1,7 +1,6 @@
 name: Snyk Code Scanning
 
 on: [workflow_dispatch]
-  
 
 jobs:
   snyk-scan:
@@ -33,4 +32,3 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: snyk-results.sarif
-
