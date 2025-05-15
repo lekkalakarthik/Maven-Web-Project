@@ -13,7 +13,7 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     needs: deploy 
-    if: always()
+    if: failure()
     steps:
       - name: Send Slack Notification with Block Kit
         uses: 8398a7/action-slack@v3
